@@ -13,7 +13,7 @@ use Tymon\JWTAuth\Exceptions\JWTException;
 
 class UserController extends Controller
 {
-
+//hi URL /login.
 public function authenticate(Request $request) {
     //ti Sólo tomamos el email y el password.
     $credentials = $request->only('email', 'password');
@@ -42,7 +42,7 @@ public function getAuthenticatedUser(){
         }
         return response()->json(compact('user'));
 }
-
+//hi URL /register.
 public function register(Request $request) {
     $validator = Validator::make($request->all(), [
     'name' => 'required|string|max:255',

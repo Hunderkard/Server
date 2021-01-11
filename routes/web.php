@@ -20,8 +20,8 @@ Route::get('/', function () {
 });
 
 //ag Para poder usarlos de la nueva manera.
-Route::post('register', [UserController::class, 'register']);
 Route::post('login', [UserController::class, 'authenticate']);
+Route::post('register', [UserController::class, 'register']);
 
 Route::group(['middleware' => ['jwt.verify']], function() {
    //fu AQUÍ LAS RUTAS PROTEGIDAS
