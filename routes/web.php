@@ -19,8 +19,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
 //ag Para poder usarlos de la nueva manera.
-Route::post('login', [UserController::class, 'authenticate']);
+Route::post('login',  [UserController::class, 'authenticate']);
 Route::post('register', [UserController::class, 'register']);
 
 Route::group(['middleware' => ['jwt.verify']], function() {
