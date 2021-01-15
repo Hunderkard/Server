@@ -20,7 +20,7 @@ public function authenticate(Request $request) {
     
     try {
         if (! $token = JWTAuth::attempt($credentials)) {
-            return response()->json(['error' => 'invalid_credentials'], 400);
+            return response()->json(['error' => 'invalid_credentials'], 401);
         }
     } catch (JWTException $e) {
         return response()->json(['error' => 'could_not_create_token'], 500);
@@ -44,24 +44,26 @@ public function getAuthenticatedUser(){
 }
 //hi URL /register.
 public function register(Request $request) {
+//bi CHECKEACIÓN
     $validator = Validator::make($request->all(), [
     'name' => 'required|string|max:255',
     'email' => 'required|string|email|max:255|unique:users',
-    'password' => 'required|string|min:6|confirmed',
+    'password' => 'required|string|min:6',
     ]); //ps Esto lo comprobaré en Angular, pero nunca viene mal otro vistazo.
-
+//bi CONTESTACIÓN
     if($validator->fails()){
             return response()->json($validator->errors()->toJson(), 400);
     }
-
+//bi CREACIÓN
     $user = User::create([
         'name' => $request->get('name'),
         'email' => $request->get('email'),
         'password' => Hash::make($request->get('password')),
+        'level' => 1
     ]);
 
     $token = JWTAuth::fromUser($user);
-
+//bi RETORNACIÓN
     return response()->json(compact('user','token'),201);
 }
 
