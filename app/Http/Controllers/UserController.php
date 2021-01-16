@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-//bi Los modelos ahora está en una carpeta.
 use App\Models\User;
 use Illuminate\Http\Request;
+
 //el Contraseñas, validadores y los JWT.
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -44,17 +44,17 @@ public function getAuthenticatedUser(){
 }
 //hi URL /register.
 public function register(Request $request) {
-//bi CHECKEACIÓN
+    //bi CHECKEACIÓN
     $validator = Validator::make($request->all(), [
     'name' => 'required|string|max:255',
     'email' => 'required|string|email|max:255|unique:users',
     'password' => 'required|string|min:6',
     ]); //ps Esto lo comprobaré en Angular, pero nunca viene mal otro vistazo.
-//bi CONTESTACIÓN
+    //bi CONTESTACIÓN
     if($validator->fails()){
             return response()->json($validator->errors()->toJson(), 400);
     }
-//bi CREACIÓN
+    //bi CREACIÓN
     $user = User::create([
         'name' => $request->get('name'),
         'email' => $request->get('email'),
@@ -63,7 +63,7 @@ public function register(Request $request) {
     ]);
 
     $token = JWTAuth::fromUser($user);
-//bi RETORNACIÓN
+    //bi RETORNACIÓN
     return response()->json(compact('user','token'),201);
 }
 
