@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 //el Contraseñas, validadores y los JWT.
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use JWTAuth;    //ps Para esto le cambiamos agregamos el facade/aliases...
+use JWTAuth;    //ps Para esto le agregamos el facade/aliases...
 use Tymon\JWTAuth\Exceptions\JWTException;
 
 class UserController extends Controller

@@ -25,6 +25,7 @@ Route::get('/', function () {
 Route::post('login',  [UserController::class, 'authenticate']);
 Route::post('register', [UserController::class, 'register']);
 Route::post('sendPasswordReset', [ResetPasswordController::class, 'sendEmail']);
+Route::post('changePasswordReset', [ResetPasswordController::class, 'resetPassword']);
 
 Route::group(['middleware' => ['jwt.verify']], function() {
    //fu AQUÍ LAS RUTAS PROTEGIDAS
